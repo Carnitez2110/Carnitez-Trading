@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
+import { AppShell } from "@/components/layout/app-shell";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -33,7 +34,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${manrope.variable} ${inter.variable} selection:bg-primary/30`}>
-        {children}
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
