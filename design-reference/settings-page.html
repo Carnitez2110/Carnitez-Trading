@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings &amp; Risk Management | The Financial Architect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#e1e1ed",
+                        "primary-fixed": "#dee0ff",
+                        "on-secondary-container": "#00444d",
+                        "on-secondary": "#00363d",
+                        "background": "#11131b",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#33343d",
+                        "primary-container": "#4453a7",
+                        "inverse-primary": "#4858ab",
+                        "surface-container": "#1d1f28",
+                        "on-secondary-fixed-variant": "#004f58",
+                        "surface-container-high": "#282a32",
+                        "inverse-on-surface": "#2e3039",
+                        "secondary-fixed-dim": "#45d8ed",
+                        "tertiary-fixed": "#ffdcc6",
+                        "tertiary-container": "#8f4700",
+                        "inverse-surface": "#e1e1ed",
+                        "surface-container-lowest": "#0c0e16",
+                        "on-tertiary-fixed": "#301400",
+                        "outline": "#8f909e",
+                        "on-primary-fixed": "#00105b",
+                        "surface-dim": "#11131b",
+                        "on-tertiary-container": "#ffc7a2",
+                        "secondary-fixed": "#98f0ff",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#ffb784",
+                        "on-tertiary": "#502500",
+                        "secondary-container": "#00bacd",
+                        "on-tertiary-fixed-variant": "#713700",
+                        "surface-tint": "#bac3ff",
+                        "on-primary-container": "#c9cfff",
+                        "surface-container-low": "#191b23",
+                        "surface-variant": "#33343d",
+                        "primary-fixed-dim": "#bac3ff",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#001f24",
+                        "surface": "#11131b",
+                        "error-container": "#93000a",
+                        "on-primary": "#15267b",
+                        "outline-variant": "#454652",
+                        "surface-bright": "#373942",
+                        "on-primary-fixed-variant": "#2f3f92",
+                        "on-surface-variant": "#c5c5d4",
+                        "secondary": "#45d8ed",
+                        "primary": "#bac3ff",
+                        "tertiary-fixed-dim": "#ffb784",
+                        "on-background": "#e1e1ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #11131b;
+            color: #e1e1ed;
+        }
+        .glass-panel {
+            background: rgba(51, 52, 61, 0.6);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-16 w-full bg-[#191b23] border-none font-['Manrope'] font-semibold tracking-tight">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#e1e1ed] tracking-wider">The Financial Architect</span>
+<div class="hidden md:flex gap-6">
+<a class="text-[#e1e1ed]/60 hover:text-[#bac3ff] transition-colors scale-95 active:duration-150" href="#">Dashboard</a>
+<a class="text-[#e1e1ed]/60 hover:text-[#bac3ff] transition-colors scale-95 active:duration-150" href="#">Portfolio</a>
+<a class="text-[#e1e1ed]/60 hover:text-[#bac3ff] transition-colors scale-95 active:duration-150" href="#">Market</a>
+<a class="text-[#e1e1ed]/60 hover:text-[#bac3ff] transition-colors scale-95 active:duration-150" href="#">Education</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#e1e1ed]/60 hover:text-[#bac3ff] transition-colors">notifications</button>
+<button class="material-symbols-outlined text-[#e1e1ed]/60 hover:text-[#bac3ff] transition-colors">account_balance_wallet</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3x2MuUUsr5JDUcnIn5AdIcnGJupptQgXNzrwYxAtP5-1tt7FrJc0yFLlCLuDWDQNNLThkXP04GllBhvcPqT5LnvMSo7jwLHRQHpFoce8cf7pLL5c41x0G3yRcYjn7K4JUfaq2c3g6950vLfY0B4QBAbdVabrni_lamEc9Gfz5mu8fMAhXMYdKB6HrNnKsxxXhraoPiSO6LO8vYEhvoZv-b1vrP2TqReg9Dab-rvrQjsO_5Sp62iCsiyQXo7MTdHd5mKaHhUF9qHc"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 h-full w-64 bg-[#11131b] flex flex-col h-full py-6 space-y-4 pt-20 border-r border-transparent">
+<div class="px-6 mb-8">
+<h2 class="text-[#e1e1ed] font-['Manrope'] font-extrabold text-lg">Private Bank</h2>
+<p class="text-[#e1e1ed]/50 text-xs tracking-wide">Institutional Grade</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 text-[#e1e1ed]/50 hover:text-[#e1e1ed] hover:bg-[#282a32]/50 transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined">dashboard</span> Overview
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#e1e1ed]/50 hover:text-[#e1e1ed] hover:bg-[#282a32]/50 transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined">query_stats</span> Analytics
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#e1e1ed]/50 hover:text-[#e1e1ed] hover:bg-[#282a32]/50 transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined">visibility</span> Watchlist
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-[#e1e1ed]/50 hover:text-[#e1e1ed] hover:bg-[#282a32]/50 transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined">psychology</span> AI Insights
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 bg-[#282a32] text-[#bac3ff] rounded-lg mx-2 font-medium text-sm" href="#">
+<span class="material-symbols-outlined">settings_accessibility</span> Settings
+            </a>
+</nav>
+<div class="mt-auto px-6 space-y-4">
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl text-sm shadow-lg shadow-primary/10">Trade Now</button>
+<div class="pt-4 border-t border-outline-variant/20 space-y-1">
+<a class="flex items-center gap-3 py-2 text-[#e1e1ed]/50 hover:text-[#e1e1ed] text-xs" href="#">
+<span class="material-symbols-outlined text-sm">help_outline</span> Support
+                </a>
+<a class="flex items-center gap-3 py-2 text-[#e1e1ed]/50 hover:text-[#e1e1ed] text-xs" href="#">
+<span class="material-symbols-outlined text-sm">logout</span> Sign Out
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 pt-24 pb-12 px-12 max-w-7xl mx-auto">
+<header class="mb-10">
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface mb-2">Settings &amp; Risk Management</h1>
+<p class="text-on-surface-variant font-body">Configure your institutional guardrails and platform preferences.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Risk Management Controls -->
+<section class="lg:col-span-8 space-y-8">
+<div class="bg-surface-container-low rounded-xl p-8 border border-transparent">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">security</span>
+<h3 class="font-headline text-xl font-bold">Capital Protection Guardrails</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<label class="text-sm font-semibold tracking-wide text-on-surface">Max Position Size</label>
+<span class="text-xs font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">Current: 5%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary" type="range"/>
+<p class="text-xs text-on-surface-variant/70 leading-relaxed">Limits the maximum capital allocated to a single trade.</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<label class="text-sm font-semibold tracking-wide text-on-surface">Daily Loss Cap</label>
+<span class="text-xs font-mono text-error bg-error/10 px-2 py-0.5 rounded">Current: 2.5%</span>
+</div>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline/40" placeholder="2.5" type="number"/>
+<p class="text-xs text-on-surface-variant/70 leading-relaxed">Automatically halts all trading if daily drawdown exceeds this threshold.</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<label class="text-sm font-semibold tracking-wide text-on-surface">Default Stop-Loss</label>
+<span class="text-xs font-mono text-secondary bg-secondary/10 px-2 py-0.5 rounded">Current: 1.5%</span>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 text-on-surface" type="text" value="1.5"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline text-sm">%</span>
+</div>
+<p class="text-xs text-on-surface-variant/70 leading-relaxed">Percentage at which positions will be exited to mitigate losses.</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<label class="text-sm font-semibold tracking-wide text-on-surface">Take Profit Target</label>
+<span class="text-xs font-mono text-on-tertiary-container bg-tertiary-container/30 px-2 py-0.5 rounded">Current: 4.5%</span>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 text-on-surface" type="text" value="4.5"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-outline text-sm">%</span>
+</div>
+<p class="text-xs text-on-surface-variant/70 leading-relaxed">Recommended target to secure gains. Suggested ratio: 3:1 relative to Stop-Loss.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-8">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline text-xl font-bold mb-1">Execution Mode</h3>
+<p class="text-sm text-on-surface-variant">Switch between simulation and live market access.</p>
+</div>
+<div class="flex bg-surface-container-lowest p-1 rounded-full">
+<button class="px-6 py-2 rounded-full text-sm font-bold transition-all bg-primary text-on-primary">Paper</button>
+<button class="px-6 py-2 rounded-full text-sm font-bold transition-all text-on-surface/50 hover:text-on-surface">Live</button>
+</div>
+</div>
+<div class="flex items-center gap-6 p-6 bg-surface-container-high rounded-xl border border-outline-variant/10">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-highest rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">Interactive Brokers (IBKR)</h4>
+<p class="text-xs text-on-surface-variant">Status: <span class="text-secondary-fixed-dim">Connected</span></p>
+</div>
+<button class="text-sm font-semibold text-primary hover:underline transition-all">Manage API</button>
+</div>
+<div class="mt-4 p-4 rounded-xl bg-tertiary-container/10 border border-tertiary-container/20">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<p class="text-xs text-on-tertiary-container leading-relaxed">
+<strong>Paper Trading active:</strong> You are currently using simulated capital.
+</p>
+</div>
+</div>
+</div>
+</section>
+<aside class="lg:col-span-4 space-y-8">
+<div class="bg-surface-container-low rounded-xl p-6">
+<h3 class="font-headline font-bold text-lg mb-6">Market Coverage</h3>
+<div class="space-y-4">
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">analytics</span>
+<span class="text-sm font-medium">US Equity Markets</span>
+</div>
+<div class="w-10 h-5 bg-primary rounded-full relative shadow-inner">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">euro_symbol</span>
+<span class="text-sm font-medium">European Stocks</span>
+</div>
+<div class="w-10 h-5 bg-surface-container-highest rounded-full relative">
+<div class="absolute left-1 top-1 w-3 h-3 bg-outline rounded-full"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">currency_bitcoin</span>
+<span class="text-sm font-medium">Digital Assets (Crypto)</span>
+</div>
+<div class="w-10 h-5 bg-primary rounded-full relative shadow-inner">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</label>
+</div>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-widest text-outline font-bold mb-4">Sentiment Engine</p>
+<div class="flex items-center gap-4">
+<div class="h-2 flex-1 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-secondary" style="width: 65%;"></div>
+<div class="h-full bg-error" style="width: 35%;"></div>
+</div>
+<span class="text-xs font-mono text-secondary">65% Bull</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6">
+<h3 class="font-headline font-bold text-lg mb-6">Notifications</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<input checked="" class="mt-1 w-5 h-5 rounded-md border-outline-variant bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<div>
+<h4 class="text-sm font-semibold">Trade Execution</h4>
+<p class="text-xs text-on-surface-variant mt-1">Instant push notification when an order is filled or cancelled.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<input checked="" class="mt-1 w-5 h-5 rounded-md border-outline-variant bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<div>
+<h4 class="text-sm font-semibold">Risk Alerts</h4>
+<p class="text-xs text-on-surface-variant mt-1">Warning when portfolio approaches daily loss cap.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<input class="mt-1 w-5 h-5 rounded-md border-outline-variant bg-surface-container-highest text-primary focus:ring-primary/20" type="checkbox"/>
+<div>
+<h4 class="text-sm font-semibold">Weekly Report</h4>
+<p class="text-xs text-on-surface-variant mt-1">Deep-dive performance analysis sent to your email.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-on-tertiary-container mb-2">school</span>
+<h4 class="font-bold text-on-surface mb-2">New to Risk Management?</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Learn why professional traders prioritize <strong>Capital Preservation</strong> over profit maximization.</p>
+<button class="text-xs font-extrabold text-primary flex items-center gap-1 hover:translate-x-1 transition-transform">
+                            View Guide <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]">architecture</span>
+</div>
+</div>
+</aside>
+</div>
+<footer class="mt-12 flex justify-end gap-4">
+<button class="px-8 py-3 rounded-xl border border-outline-variant text-sm font-bold hover:bg-surface-container-highest transition-colors">Reset to Default</button>
+<button class="px-10 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary text-sm font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">Save Changes</button>
+</footer>
+</main>
+</body></html>

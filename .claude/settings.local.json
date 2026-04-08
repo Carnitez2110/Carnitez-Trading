@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:/Users/bryan/Desktop/Trades/\" log --oneline -5)",
+      "WebFetch(domain:stitch.withgoogle.com)",
+      "WebSearch"
+    ]
+  }
+}

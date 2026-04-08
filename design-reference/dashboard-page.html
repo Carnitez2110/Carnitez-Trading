@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Financial Architect | Institutional Wealth Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#8f909e",
+                    "error": "#ffb4ab",
+                    "outline-variant": "#454652",
+                    "secondary-fixed": "#98f0ff",
+                    "surface-tint": "#bac3ff",
+                    "on-surface-variant": "#c5c5d4",
+                    "surface-container-highest": "#33343d",
+                    "secondary-fixed-dim": "#45d8ed",
+                    "on-secondary-fixed-variant": "#004f58",
+                    "tertiary-container": "#8f4700",
+                    "surface-container-high": "#282a32",
+                    "surface-bright": "#373942",
+                    "primary-fixed-dim": "#bac3ff",
+                    "on-tertiary-container": "#ffc7a2",
+                    "surface-container": "#1d1f28",
+                    "on-tertiary": "#502500",
+                    "surface": "#11131b",
+                    "tertiary-fixed": "#ffdcc6",
+                    "background": "#11131b",
+                    "surface-container-lowest": "#0c0e16",
+                    "on-primary": "#15267b",
+                    "tertiary-fixed-dim": "#ffb784",
+                    "on-surface": "#e1e1ed",
+                    "on-tertiary-fixed-variant": "#713700",
+                    "inverse-on-surface": "#2e3039",
+                    "inverse-surface": "#e1e1ed",
+                    "on-secondary": "#00363d",
+                    "secondary-container": "#00bacd",
+                    "primary-container": "#4453a7",
+                    "on-primary-fixed-variant": "#2f3f92",
+                    "primary-fixed": "#dee0ff",
+                    "surface-container-low": "#191b23",
+                    "secondary": "#45d8ed",
+                    "tertiary": "#ffb784",
+                    "inverse-primary": "#4858ab",
+                    "on-tertiary-fixed": "#301400",
+                    "primary": "#bac3ff",
+                    "on-primary-container": "#c9cfff",
+                    "on-secondary-fixed": "#001f24",
+                    "on-primary-fixed": "#00105b",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#00444d",
+                    "error-container": "#93000a",
+                    "surface-variant": "#33343d",
+                    "on-background": "#e1e1ed",
+                    "surface-dim": "#11131b",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #11131b; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .bg-approve-gradient { background: linear-gradient(135deg, #bac3ff 0%, #4453a7 100%); }
+        .glass-panel { background: rgba(51, 52, 61, 0.6); backdrop-filter: blur(24px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden">
+<header class="w-full top-0 sticky z-50 bg-[#11131b] border-none">
+<div class="flex justify-between items-center w-full px-8 h-16 max-w-[1440px] mx-auto font-manrope antialiased tracking-tight">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#e1e1ed] tracking-tight">The Financial Architect</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-[#bac3ff] font-semibold border-b-2 border-[#bac3ff] pb-1" href="#">Portfolio</a>
+<a class="text-[#e1e1ed]/60 hover:text-[#e1e1ed] transition-colors" href="#">Markets</a>
+<a class="text-[#e1e1ed]/60 hover:text-[#e1e1ed] transition-colors" href="#">Signals</a>
+<a class="text-[#e1e1ed]/60 hover:text-[#e1e1ed] transition-colors" href="#">History</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-[#191b23] rounded-lg">
+<span class="material-symbols-outlined text-sm text-[#bac3ff]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface-variant w-32 lg:w-48" placeholder="Search markets..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-[#e1e1ed]/60 hover:bg-[#282a32] transition-all rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-[#e1e1ed]/60 hover:bg-[#282a32] transition-all rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest"></div>
+</div>
+</div>
+</header>
+<aside class="hidden lg:flex flex-col py-6 border-r border-[#454652]/15 h-full w-64 fixed left-0 top-16 bg-[#191b23] font-manrope text-sm">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#bac3ff]" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<p class="text-lg font-black text-[#e1e1ed] leading-tight">Private Wealth</p>
+<p class="text-xs text-on-surface-variant/60 uppercase tracking-widest">Institutional Grade</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 py-3 px-6 bg-[#282a32] text-[#bac3ff] font-medium rounded-r-full mr-4" href="#">
+<span class="material-symbols-outlined">dashboard</span>Dashboard
+</a>
+<a class="flex items-center gap-3 py-3 px-6 text-[#e1e1ed]/50 hover:bg-[#282a32]/50 hover:text-[#e1e1ed] ml-4 mr-4 mb-2 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>Analytics
+</a>
+<a class="flex items-center gap-3 py-3 px-6 text-[#e1e1ed]/50 hover:bg-[#282a32]/50 hover:text-[#e1e1ed] ml-4 mr-4 mb-2 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">psychology</span>AI Insights
+</a>
+<a class="flex items-center gap-3 py-3 px-6 text-[#e1e1ed]/50 hover:bg-[#282a32]/50 hover:text-[#e1e1ed] ml-4 mr-4 mb-2 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>Orders
+</a>
+<a class="flex items-center gap-3 py-3 px-6 text-[#e1e1ed]/50 hover:bg-[#282a32]/50 hover:text-[#e1e1ed] ml-4 mr-4 mb-2 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">shield</span>Security
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-4 bg-approve-gradient text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined">add_chart</span>New Trade
+</button>
+</div>
+</aside>
+<main class="lg:ml-64 pt-6 px-8 pb-12 max-w-[1440px]">
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="md:col-span-2 flex flex-col justify-end">
+<p class="text-on-surface-variant text-sm font-medium tracking-wide uppercase mb-1">Total Portfolio Value</p>
+<div class="flex items-baseline gap-4">
+<h1 class="text-5xl font-extrabold font-manrope tracking-tight text-on-surface">€142,850.42</h1>
+<div class="flex items-center gap-1 text-secondary font-bold text-lg">
+<span class="material-symbols-outlined text-sm">trending_up</span>+2.4%
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between">
+<div>
+<p class="text-on-surface-variant text-xs uppercase tracking-widest mb-1">Buying Power</p>
+<p class="text-2xl font-bold font-manrope">€42,105.00</p>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden mt-4">
+<div class="bg-secondary h-full" style="width: 65%;"></div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold font-manrope">Active AI Signals</h2>
+<span class="text-xs text-on-surface-variant/60 italic">Updated 2 minutes ago</span>
+</div>
+<div class="bg-surface-container p-1 rounded-xl">
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col md:flex-row gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-xl font-bold text-on-surface">ASML</div>
+<div>
+<h3 class="font-bold text-lg">ASML Holding N.V.</h3>
+<div class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/20">BULLISH</div>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">The stock has hit a significant technical support level at €640. AI analysis detects an "Oversold" condition on RSI (28.4) combined with heavy institutional accumulation over the last 48 hours.</p>
+<div class="flex gap-4">
+<button class="flex-1 h-12 bg-approve-gradient text-on-primary font-bold rounded-xl hover:brightness-110 active:scale-95 transition-all">Approve Trade</button>
+<button class="px-6 h-12 border border-outline-variant/30 text-on-surface font-medium rounded-xl hover:bg-surface-container-highest transition-all active:scale-95">Skip</button>
+</div>
+</div>
+<div class="md:w-48 flex flex-col items-center justify-center border-l border-outline-variant/10 md:pl-6">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="54.6" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-extrabold font-manrope">85%</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Confidence</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-1 rounded-xl">
+<div class="bg-surface-container-high rounded-lg p-6 flex flex-col md:flex-row gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-xl font-bold text-on-surface">SHEL</div>
+<div>
+<h3 class="font-bold text-lg">Shell PLC</h3>
+<div class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-error/10 text-error border border-error/20">BEARISH</div>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Global energy demand forecasts are being revised downward. Shell's price action shows a "Head and Shoulders" pattern completing on the daily chart. Low institutional conviction detected.</p>
+<div class="flex gap-4">
+<button class="flex-1 h-12 bg-approve-gradient text-on-primary font-bold rounded-xl hover:brightness-110 transition-all">Approve Trade</button>
+<button class="px-6 h-12 border border-outline-variant/30 text-on-surface font-medium rounded-xl hover:bg-surface-container-highest transition-all">Skip</button>
+</div>
+</div>
+<div class="md:w-48 flex flex-col items-center justify-center border-l border-outline-variant/10 md:pl-6">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-error" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="145.7" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-extrabold font-manrope">60%</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Confidence</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-surface-container-low p-6 rounded-xl">
+<h3 class="text-sm font-bold font-manrope text-on-surface-variant uppercase tracking-widest mb-6">Market Sentiment</h3>
+<div class="relative pt-4 pb-2">
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-error" style="width: 30%"></div>
+<div class="h-full bg-outline-variant" style="width: 40%"></div>
+<div class="h-full bg-secondary" style="width: 30%"></div>
+</div>
+<div class="absolute top-0 flex flex-col items-center" style="left: 72%;">
+<div class="w-0.5 h-6 bg-on-surface"></div>
+<div class="bg-on-surface text-surface py-0.5 px-2 rounded text-[10px] font-bold mt-1">72</div>
+</div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] font-bold text-on-surface-variant/40 uppercase">
+<span>Fear</span><span class="text-secondary">Greed</span>
+</div>
+<div class="mt-8 p-4 bg-tertiary-container/10 border border-tertiary-container/20 rounded-lg">
+<p class="text-xs text-on-tertiary-container leading-relaxed"><span class="font-bold">Insight:</span> Extreme greed detected in Tech sector. Recommend cautious exposure to high-beta assets.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-4 rounded-xl">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 mb-1">Win Rate</p>
+<p class="text-2xl font-extrabold font-manrope text-secondary">68%</p>
+</div>
+<div class="bg-surface-container p-4 rounded-xl">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 mb-1">Total Trades</p>
+<p class="text-2xl font-extrabold font-manrope">142</p>
+</div>
+<div class="bg-surface-container p-4 rounded-xl col-span-2">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 mb-1">Best Performer</p>
+<p class="text-xl font-extrabold font-manrope">ADYEN</p>
+</div>
+<span class="text-secondary font-bold text-sm">+18.2%</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl">
+<h3 class="text-sm font-bold font-manrope text-on-surface-variant uppercase tracking-widest mb-4">Recent Activity</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+<div>
+<p class="text-sm font-bold">Bought Ferrari NV</p>
+<p class="text-[10px] text-on-surface-variant/60">Today, 10:24 AM</p>
+</div>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">€4,200</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-lg">schedule</span>
+<div>
+<p class="text-sm font-bold">Sold Prosus</p>
+<p class="text-[10px] text-on-surface-variant/60">Yesterday, 04:15 PM</p>
+</div>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">€2,850</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-lg">check_circle</span>
+<div>
+<p class="text-sm font-bold">Bought ING Group</p>
+<p class="text-[10px] text-on-surface-variant/60">Oct 24, 11:30 AM</p>
+</div>
+</div>
+<span class="text-xs font-medium text-on-surface-variant">€1,120</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#191b23] flex justify-around items-center px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-[#bac3ff]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#e1e1ed]/50">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[10px]">Markets</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#e1e1ed]/50">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-[10px]">Signals</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#e1e1ed]/50">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+<div class="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[30%] h-[30%] bg-secondary/5 blur-[120px] rounded-full"></div>
+</div>
+</body></html>
