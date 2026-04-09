@@ -4,7 +4,7 @@ import { TopNav } from "@/components/layout/top-nav";
 describe("TopNav", () => {
   it("renders the brand name", () => {
     render(<TopNav />);
-    expect(screen.getByText("The Financial Architect")).toBeInTheDocument();
+    expect(screen.getByText("Carnitez Trading")).toBeInTheDocument();
   });
 
   it("renders navigation links", () => {

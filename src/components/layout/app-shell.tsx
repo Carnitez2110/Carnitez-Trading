@@ -1,6 +1,7 @@
 import { TopNav } from "./top-nav";
 import { SideNav } from "./side-nav";
 import { BottomNav } from "./bottom-nav";
+import { UserMenu } from "./user-menu";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ export function AppShell({ children }: AppShellProps) {
         <div className="absolute bottom-[-10%] left-[-5%] w-[30%] h-[30%] bg-secondary/5 blur-[120px] rounded-full" />
       </div>
 
-      <TopNav />
+      <TopNav userSlot={<UserMenu />} />
       <SideNav />
 
       <main className="lg:ml-64 pt-6 px-8 pb-20 lg:pb-12 max-w-[1440px]">

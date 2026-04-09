@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
-import { AppShell } from "@/components/layout/app-shell";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -16,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "The Financial Architect",
+  title: "Carnitez Trading",
   description: "AI-powered trading platform for beginners",
 };
 
@@ -34,7 +33,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${manrope.variable} ${inter.variable} selection:bg-primary/30`}>
-        <AppShell>{children}</AppShell>
+        {children}
       </body>
     </html>
   );

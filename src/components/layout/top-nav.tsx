@@ -11,7 +11,11 @@ const navLinks = [
   { href: "/portfolio", label: "History" },
 ];
 
-export function TopNav() {
+interface TopNavProps {
+  userSlot?: React.ReactNode;
+}
+
+export function TopNav({ userSlot }: TopNavProps = {}) {
   const pathname = usePathname();
 
   return (
@@ -19,7 +23,7 @@ export function TopNav() {
       <div className="flex justify-between items-center w-full px-8 h-16 max-w-[1440px] mx-auto font-headline antialiased tracking-tight">
         <div className="flex items-center gap-8">
           <Link href="/" className="text-xl font-bold text-on-surface tracking-tight">
-            The Financial Architect
+            Carnitez Trading
           </Link>
           <nav className="hidden md:flex gap-6 items-center">
             {navLinks.map((link) => {
@@ -58,7 +62,9 @@ export function TopNav() {
               <span className="material-symbols-outlined">settings</span>
             </button>
           </div>
-          <div className="w-8 h-8 rounded-full bg-surface-container-highest" />
+          {userSlot ?? (
+            <div className="w-8 h-8 rounded-full bg-surface-container-highest" />
+          )}
         </div>
       </div>
     </header>

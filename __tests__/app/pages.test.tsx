@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 
-import DashboardPage from "@/app/page";
-import PortfolioPage from "@/app/portfolio/page";
-import MarketsPage from "@/app/markets/page";
-import InsightsPage from "@/app/insights/page";
-import SettingsPage from "@/app/settings/page";
+import DashboardPage from "@/app/(app)/page";
+import PortfolioPage from "@/app/(app)/portfolio/page";
+import MarketsPage from "@/app/(app)/markets/page";
+import InsightsPage from "@/app/(app)/insights/page";
+import SettingsPage from "@/app/(app)/settings/page";
 
 describe("Page routes", () => {
   it("renders Dashboard page", () => {
