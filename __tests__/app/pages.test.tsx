@@ -22,6 +22,7 @@ jest.mock("@/lib/trading/actions", () => ({
   approveSignal: jest.fn(),
   skipSignal: jest.fn(),
   closePosition: jest.fn(),
+  requestMarketScan: jest.fn(),
 }));
 
 import DashboardPage from "@/app/(app)/page";

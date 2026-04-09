@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { requestMarketScan } from "@/lib/trading/actions";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: "dashboard" },
@@ -57,11 +58,20 @@ export function SideNav() {
         })}
       </nav>
 
-      <div className="px-4 mt-auto">
-        <button className="w-full py-4 bg-approve-gradient text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/10 active:scale-95 transition-all">
-          <span className="material-symbols-outlined">add_chart</span>
-          New Trade
-        </button>
+      <div className="px-4 mt-auto space-y-2">
+        <form action={requestMarketScan}>
+          <button
+            type="submit"
+            className="w-full py-4 bg-approve-gradient text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/10 active:scale-95 transition-all hover:brightness-110"
+          >
+            <span className="material-symbols-outlined">radar</span>
+            Run Market Scan
+          </button>
+        </form>
+        <p className="text-[10px] text-on-surface-variant/60 text-center leading-tight px-2">
+          Scans US movers + top crypto. Claude deep-dives the top 10. Takes
+          30–60 seconds. ~$0.14 per scan.
+        </p>
       </div>
     </aside>
   );

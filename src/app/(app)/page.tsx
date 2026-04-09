@@ -4,6 +4,7 @@ import {
   approveSignal,
   skipSignal,
   closePosition,
+  requestMarketScan,
 } from "@/lib/trading/actions";
 import { WATCHLIST, type WatchlistTicker } from "@/lib/data/watchlist";
 import type {
@@ -67,13 +68,24 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <header className="mb-8">
-        <h1 className="font-headline text-4xl font-extrabold tracking-tight text-on-surface mb-2">
-          Dashboard
-        </h1>
-        <p className="text-on-surface-variant">
-          Your AI-powered paper trading desk.
-        </p>
+      <header className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <h1 className="font-headline text-4xl font-extrabold tracking-tight text-on-surface mb-2">
+            Dashboard
+          </h1>
+          <p className="text-on-surface-variant">
+            Your AI-powered paper trading desk.
+          </p>
+        </div>
+        <form action={requestMarketScan} className="flex-shrink-0">
+          <button
+            type="submit"
+            className="rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold px-5 py-3 flex items-center gap-2 shadow-lg shadow-primary/10 hover:brightness-110 active:scale-95 transition-all"
+          >
+            <span className="material-symbols-outlined">radar</span>
+            Run Market Scan
+          </button>
+        </form>
       </header>
 
       {/* Portfolio summary */}
@@ -99,7 +111,9 @@ export default async function DashboardPage() {
         </h2>
         {pendingSignals.length === 0 ? (
           <div className="bg-surface-container-low rounded-xl p-6 text-on-surface-variant text-sm">
-            No pending signals. Request one from the watchlist below.
+            No pending signals. Click <span className="text-primary font-semibold">Run Market Scan</span> above
+            to have Claude analyze the top US movers and top crypto, or request
+            a specific ticker from the watchlist below.
           </div>
         ) : (
           <div className="space-y-4">

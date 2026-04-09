@@ -1,9 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import { SideNav } from "@/components/layout/side-nav";
 
 jest.mock("next/navigation", () => ({
   usePathname: () => "/",
 }));
+
+jest.mock("@/lib/trading/actions", () => ({
+  requestMarketScan: jest.fn(),
+}));
+
+import { SideNav } from "@/components/layout/side-nav";
 
 describe("SideNav", () => {
   it("renders the brand subtitle", () => {
@@ -21,8 +26,8 @@ describe("SideNav", () => {
     expect(screen.getByText("Settings")).toBeInTheDocument();
   });
 
-  it("renders the New Trade button", () => {
+  it("renders the Run Market Scan button", () => {
     render(<SideNav />);
-    expect(screen.getByText("New Trade")).toBeInTheDocument();
+    expect(screen.getByText("Run Market Scan")).toBeInTheDocument();
   });
 });

@@ -2,7 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { getMarketSnapshot, getCurrentPrice } from "@/lib/market-data";
+import {
+  getMarketSnapshot,
+  getMarketSnapshotForConfig,
+  getCurrentPrice,
+} from "@/lib/market-data";
+import { screenTopCandidates } from "@/lib/market-data/screener";
 import { findTicker } from "@/lib/data/watchlist";
 import { generateSignal, SignalGenerationError } from "@/lib/ai/claude";
 import type {
@@ -361,6 +366,186 @@ export async function closePosition(formData: FormData): Promise<void> {
         balance_eur: Number((paper as PaperAccount).balance_eur) + proceeds,
       })
       .eq("user_id", user.id);
+  }
+
+  revalidatePath("/");
+}
+
+// =============================================================================
+// requestMarketScan — AI discovery pipeline
+// =============================================================================
+// Runs the full screen → rank → Claude deep-dive flow:
+//   1. Fetch shallow candidates from Alpha Vantage US movers + CoinGecko crypto
+//   2. Score by momentum / volume / sweet-spot heuristic
+//   3. Take the top N (default 10)
+//   4. For each, fetch the full technical snapshot (cached 5 min)
+//   5. Ask Claude for a BUY/HOLD/SELL signal with plain-English reasoning
+//   6. Insert into ai_signals with status = pending
+//
+// Partial failures are tolerated — if one ticker fails, the rest still land.
+// This is the primary discovery flow now that we've moved past hardcoded
+// per-ticker clicking.
+//
+// Cost: ~$0.14 per full scan (10 × $0.014 Claude calls) + 1 Alpha Vantage
+// call (1/25 of free daily quota).
+// =============================================================================
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function requestMarketScan(formData?: FormData): Promise<void> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
+
+  // 1 + 2. Screen and rank.
+  let top;
+  try {
+    top = await screenTopCandidates(10);
+  } catch (err) {
+    throw new Error(`Market scan failed: ${(err as Error).message}`);
+  }
+
+  if (top.length === 0) {
+    throw new Error("Screener returned zero candidates");
+  }
+
+  console.log(
+    `[market-scan] top ${top.length} candidates: ${top
+      .map((c) => `${c.ticker}(${c.score.toFixed(1)})`)
+      .join(", ")}`
+  );
+
+  // 3. Skip tickers that already have a pending signal (don't spam the user
+  //    or waste API calls if a previous scan's output hasn't been actioned).
+  const { data: existingPending } = await supabase
+    .from("ai_signals")
+    .select("ticker")
+    .eq("user_id", user.id)
+    .eq("status", "pending");
+  const pendingTickers = new Set(
+    (existingPending ?? []).map((s) => (s as { ticker: string }).ticker)
+  );
+
+  const toDeepDive = top.filter((c) => !pendingTickers.has(c.ticker));
+  const skipped = top.length - toDeepDive.length;
+  if (skipped > 0) {
+    console.log(
+      `[market-scan] skipping ${skipped} ticker(s) with existing pending signals`
+    );
+  }
+
+  if (toDeepDive.length === 0) {
+    revalidatePath("/");
+    return;
+  }
+
+  // 4. Fetch snapshots with rate-limit awareness. Alpha Vantage enforces a
+  //    1-request-per-second burst limit on the free tier, so stock snapshots
+  //    run SERIALLY with a 1.2s stagger on cache misses. Crypto snapshots run
+  //    in parallel (CoinGecko's ~30 req/min is comfortably above our needs).
+  //    If a snapshot was served from cache (fast return <200ms) we skip the
+  //    stagger since no provider call was made.
+  const snapshots: Array<{
+    config: (typeof toDeepDive)[number];
+    snapshot: Awaited<ReturnType<typeof getMarketSnapshotForConfig>>;
+  }> = [];
+  const snapshotFailures: string[] = [];
+
+  const cryptoCandidates = toDeepDive.filter((c) => c.asset_type === "crypto");
+  const stockCandidates = toDeepDive.filter((c) => c.asset_type !== "crypto");
+
+  // Kick off crypto snapshots in parallel; we'll await them alongside the
+  // serial stock loop.
+  const cryptoPromise = Promise.allSettled(
+    cryptoCandidates.map(async (c) => ({
+      config: c,
+      snapshot: await getMarketSnapshotForConfig(c),
+    }))
+  );
+
+  // Serial stock snapshot fetch with stagger.
+  for (const c of stockCandidates) {
+    const started = Date.now();
+    try {
+      const snapshot = await getMarketSnapshotForConfig(c);
+      snapshots.push({ config: c, snapshot });
+      const elapsed = Date.now() - started;
+      // Only throttle if we likely hit the upstream (>200ms response time).
+      if (elapsed > 200) {
+        await new Promise((r) => setTimeout(r, 1200));
+      }
+    } catch (err) {
+      snapshotFailures.push(`${c.ticker}: ${(err as Error).message}`);
+    }
+  }
+
+  // Collect parallel crypto results.
+  const cryptoSettled = await cryptoPromise;
+  for (let i = 0; i < cryptoSettled.length; i++) {
+    const result = cryptoSettled[i];
+    if (result.status === "fulfilled") {
+      snapshots.push(result.value);
+    } else {
+      snapshotFailures.push(
+        `${cryptoCandidates[i].ticker}: ${String(result.reason)}`
+      );
+    }
+  }
+
+  if (snapshotFailures.length > 0) {
+    console.error(
+      `[market-scan] ${snapshotFailures.length} snapshot fetch failure(s):`
+    );
+    for (const f of snapshotFailures) console.error(`  ${f}`);
+  }
+
+  if (snapshots.length === 0) {
+    throw new Error(
+      "All candidate snapshots failed to fetch — market data unavailable"
+    );
+  }
+
+  // 5 + 6. Run Claude on each snapshot in parallel and insert the signals.
+  //    Anthropic has no tight rate limit; parallelism is safe here.
+  const results = await Promise.allSettled(
+    snapshots.map(async ({ config: c, snapshot }) => {
+      try {
+        const signal = await generateSignal(snapshot);
+        const { error: insertError } = await supabase.from("ai_signals").insert({
+          user_id: user.id,
+          ticker: c.ticker,
+          name: c.name,
+          asset_type: c.asset_type,
+          action: signal.action,
+          sentiment: signal.sentiment,
+          confidence_pct: signal.confidence,
+          reasoning_text: signal.reasoning,
+          risk_level: signal.risk_level,
+          suggested_entry: signal.suggested_entry,
+          suggested_stop_loss: signal.suggested_stop_loss,
+          suggested_take_profit: signal.suggested_take_profit,
+          status: "pending",
+        });
+        if (insertError) {
+          throw new Error(`DB insert: ${insertError.message}`);
+        }
+      } catch (err) {
+        throw new Error(`${c.ticker}: ${(err as Error).message}`);
+      }
+    })
+  );
+
+  const succeeded = results.filter((r) => r.status === "fulfilled").length;
+  const failed = results.filter((r) => r.status === "rejected");
+  console.log(
+    `[market-scan] ${succeeded}/${toDeepDive.length} signals created`
+  );
+  if (failed.length > 0) {
+    console.error(`[market-scan] ${failed.length} failure(s):`);
+    for (const r of failed) {
+      console.error(`  ${(r as PromiseRejectedResult).reason}`);
+    }
   }
 
   revalidatePath("/");
